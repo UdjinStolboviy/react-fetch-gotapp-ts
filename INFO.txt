@@ -1,0 +1,167 @@
+npx create-react-app my-app --template typescript
+yarn add node-sass@4.14.1
+npm install react-bootstrap bootstrap --save
+
+# or
+
+yarn create react-app my-app --template typescript
+
+npx create-react-app . 
+
+-------------------------------------------------
+npm install node-sass@4.0.0 --save  
+(v4.000)
+
+npm uninstall node-sass
+npm install node-sass@4.14.1
+yarn remove node-sass
+yarn add node-sass@4.14.1
+
+� �����, ��� ������ ������� � ���, ��� �� �������������� �������������� ����������� � ������� npm, � �� ����� ��� ������������ node_modules ���� ������� � ������� yarn. ��� �����-�� �������������� ����� ����� ����� ����������� - ���� � ����� ��� ����� node_modules � lock � ������ ����� npm install(������� �������� ��� ����������� ����������� ������), ����� ��� ����� �������� ���������.
+
+--------------------------------------------------------------------------------------------------
+
+npm install react-bootstrap bootstrap
+npm install --save reactstrap react react-dom
+------------------------------------------------------------------------
+�������� ���� ������������  ����� ���� packagejson
+
+npm install
+
+---------------------------------------------------
+
+npm install react-bootstrap bootstrap --save
+
+
+npm install --save styled-components
+
+npm install --save-dev @types/styled-components
+
+____________________________________________________________________________
+
+�����  ����  ����������  �����  ����� ��������� � @  ����  �����  �  �������  
+
+��������  �  ������� "@typescript"
+-----------------------------------------------------------------------------
+
+
+BASH / WINDOWS
+pwd - вывести рабочий каталог
+mkdir [имя папок] - создать папки
+rm -r [имя папок] - удалить папки
+touch [имя файлов] - создать файлы
+touch [имя папки]/{[имя файла],[...]} - создать файлы внутри указанной папки
+cd .. | [имя папки] - подняться на уровень вверх | перейти в дерикторию
+ls -*a -*l - вывод файлов и папок в текущей директории *вместе со скрытыми *и информацией о размере и дате создания
+echo ['текст'] >> [имя файла] - создать файл с указанным текстом
+cat [имя файла] - вывести содержимое файла в консоль
+NPM / NODE.JS
+npm init -*y - инициировать проект *с ответом "да" на все вопросы
+npm version - отобразить информацию о Node.JS
+npm prefix -*g - отобразить путь расположения *глобальных пакетов
+npm *run [название скрипта] - запуск скрипта
+npm install | i [название пакетов] - установить пакеты
+npm uninstall | un [название пакетов] - удалить пакеты 
+npm list --depth=[уровень] -*g - вывести список установленных пакетов *в глобальный путь 
+npm list [название пакетов] - отбразить версию пакетов 
+npm update - обновить все пакеты
+
+Ключи для комманд install, uninstall и update:
+-g - установить, удалить и обновить пакет глобально
+--save | -S - установить, удалить и обновить пакет в зависимость dependencies
+--save-dev | -D - установить, удалить и обновить пакет в зависимость devDependencies
+YARN / NODE.JS
+yarn init -*y - инициировать проект *с ответом "да" на все вопросы
+yarn --version - отобразить версию yarn'а
+yarn *install - уставить все пакеты и зависимости
+yarn *run [название скрипта] - запуск скрипта
+yarn add [навзание пакетов]*@[версия] --*offline - установить пакеты *определенной версии *офлайн
+yarn remove [название пакетов]*@[версия] - удалить пакеты *определенной версии
+yarn check - проверяет, что зависимости в package.json совпадают с зависимостями в файле yarn.lock
+yarn list --depth=[уровень] - вывести список установленных пакетов
+yarn list --pattern [название пакетов] - отбразить версию пакетов 
+yarn upgrade --*latest - полностью удалить и установить все пакеты *до последней версии
+    
+Ключи для комманд add, remove и upgrade:
+global - установить, удалить и обновить пакет глобально
+--dev - установить, удалить и обновить пакет в зависимость devDependencies
+--peer - установить, удалить и обновить пакет в зависимость peerDependencies
+--optional - установить, удалить и обновить пакет в зависимость optionalDependencies
+
+"homepage": "https://udjinstolboviy.github.io/ua/app/react-todo/",
+
+
+# Eslint + Prettier configuration for Typescript 3.7+ (2020)
+
+1. Install required dependencies
+```sh
+npm install --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-prettier eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-prettier eslint-plugin-promise eslint-plugin-react eslint-plugin-standard prettier
+
+# OR
+
+yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-prettier eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-prettier eslint-plugin-promise eslint-plugin-react eslint-plugin-standard prettier
+```
+
+2. Setup your `.eslintrc` config file
+```jsonc
+{
+  "rules": {
+    "@typescript-eslint/ban-ts-ignore": ["off"],
+    "@typescript-eslint/camelcase": ["off"],
+    "@typescript-eslint/explicit-function-return-type": ["off"],
+    "@typescript-eslint/interface-name-prefix": ["off"],
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "@typescript-eslint/no-unused-expressions": ["off"],
+    "@typescript-eslint/no-var-requires": ["off"],
+    "@typescript-eslint/no-use-before-define": ["off"],
+    "comma-dangle": ["error", "always-multiline"],
+    "no-async-promise-executor": ["off"],
+    "no-empty-pattern": ["off"],
+    "no-undef": ["error"],
+    "no-var": ["error"],
+    "object-curly-spacing": ["error", "always"],
+    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+    "semi": ["error", "always"],
+    "spaced-comment": ["off"],
+    "no-prototype-builtins": ["off"],
+    "sort-keys": ["off"],
+    "space-before-function-paren": ["off"],
+    "indent": ["off"],
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "standard",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["prettier", "@typescript-eslint"]
+}
+```
+3. Add the following `lint` script to package.json
+```jsonc
+{
+"scripts": {
+    "lint": "eslint -c './.eslintrc' --fix './src/**/*.ts'",
+  },
+}
+```
+
+4. (optional) Setup `.prettierc` for prettier-vscode extension
+
+```jsonc
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "trailingComma": "all",
+  "printWidth": 100
+}
+```
