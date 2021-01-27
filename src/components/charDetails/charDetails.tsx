@@ -3,6 +3,24 @@ import "./charDetails.css";
 import gotService from "../../services/gotService";
 import { RandomCharIterface } from "../interfece";
 
+const Field = ({
+  char,
+  field,
+  label,
+}: {
+  char?: any;
+  field: any;
+  label: string;
+}): JSX.Element => {
+  return (
+    <li className="list-group-item d-flex justify-content-between">
+      <span className="term">{label}</span>
+      <span>{char[field]}</span>
+    </li>
+  );
+};
+
+export { Field };
 export default class CharDetails extends Component<RandomCharIterface> {
   gotService = new gotService();
 
@@ -30,30 +48,26 @@ export default class CharDetails extends Component<RandomCharIterface> {
     if (!this.state.char) {
       return <span className="select-error">Plecse select a chracter</span>;
     }
-
-    const { name, gender, born, died, culture }: any = this.state.char;
+    const { char }: any = this.state;
+    const { name }: any = char;
     return (
       <div className="char-details rounded">
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item d-flex justify-content-between">
-            <span className="term">Gender</span>
-            <span>{gender}</span>
-          </li>
-          <li className="list-group-item d-flex justify-content-between">
-            <span className="term">Born</span>
-            <span>{born}</span>
-          </li>
-          <li className="list-group-item d-flex justify-content-between">
-            <span className="term">Died</span>
-            <span>{died}</span>
-          </li>
-          <li className="list-group-item d-flex justify-content-between">
-            <span className="term">Culture</span>
-            <span>{culture}</span>
-          </li>
+          {React.Children.map(this.props.children, (child): any => {
+            if (React.isValidElement(child)) {
+              return React.cloneElement(child, { char });
+            }
+          })}
         </ul>
       </div>
     );
   }
 }
+
+// function children(
+//   children: any,
+//   arg1: { char: any }
+// ): React.DetailedReactHTMLElement<any, HTMLElement> {
+//   throw new Error("Function not implemented.");
+// }

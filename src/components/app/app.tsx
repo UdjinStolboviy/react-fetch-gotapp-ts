@@ -38,7 +38,7 @@ export default class App extends Component<
       };
     });
   };
-  onCharSelected!: (...i: any[]) => any;
+  onItemSelected!: (...i: any[]) => any;
 
   render(): JSX.Element {
     const char = this.state.showRandomChar ? <RandomChar /> : null;
@@ -63,8 +63,15 @@ export default class App extends Component<
           <Row>
             <Col md="6">
               <ItemList
-                onCharSelected={this.onCharSelected}
+                onItemSelected={this.onItemSelected}
                 getData={this.gotService.getAllBooks}
+                renderItem={(item) => item.name}
+                // renderItem={(item) => (
+                //   <>
+                //     <span>{item.name}</span>
+                //     <button>Click me</button>
+                //   </>
+                // )}
               />
             </Col>
             <Col md="6">
@@ -74,8 +81,9 @@ export default class App extends Component<
           <Row>
             <Col md="6">
               <ItemList
-                onCharSelected={this.onCharSelected}
+                onItemSelected={this.onItemSelected}
                 getData={this.gotService.getAllHouses}
+                renderItem={(item) => item.name}
               />
             </Col>
             <Col md="6">

@@ -14,21 +14,31 @@ import { MouseEventHandler } from "react";
 
 export interface RandomCharIterface {
     charId?: boolean | number,
-    selectetChar?: boolean | number,
+    selectetChar?: number,
     error?: boolean,
     getCharacter?: (id: number | undefined) => void,
-    onCharSelected?: (...i: any[]) => any;
+    onItemSelected?: (...i: any[]) => any;
     onClick?: (...args: any[]) => any;
+    renderItem?: (item: {
+        name?: any;
+        gender?: any;
+    }) => any;
+    getData?: any;
+
     // onCharSelected?: (i: number | undefined) => void,
 }
 
 export interface ItemListInterface {
     charId?: boolean | number,
-    selectetChar?: boolean | number,
+    selectetChar?: number,
     getCharacter?: (id: number | undefined) => void,
-    onCharSelected: (...i: any[]) => any;
+    onItemSelected: (...i: any[]) => any;
     onClick?: (...args: any[]) => any;
-    getData: any
+    renderItem: (item: {
+        name?: any;
+        gender?: any;
+    }) => any;
+    getData?: any;
 }
 
 export interface TransformType {

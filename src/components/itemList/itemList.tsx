@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-direct-mutation-state */
 import React, { Component } from "react";
 import "./itemList.css";
@@ -45,13 +46,15 @@ export default class ItemList extends Component<ItemListInterface, {}, any> {
       ? null
       : arr.map(
           (item: any, i: number): JSX.Element => {
+            const { id } = item;
+            const label = this.props.renderItem(item);
             return (
               <li
                 key={Math.random() + i}
                 className="list-group-item"
-                onClick={(): any => this.props.onCharSelected(40 + i)}
+                onClick={(): any => this.props.onItemSelected(40 + i)}
               >
-                {item.name}
+                {label}
               </li>
             );
           }
