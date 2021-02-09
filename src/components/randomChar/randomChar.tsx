@@ -1,73 +1,56 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { Component } from "react";
 import "./randomChar.css";
 import gotService from "../../services/gotService";
-import { RandomCharIterface } from "../interfece";
 import Spinner from "../spinner";
 import ErrorMessage from "../errorMessage";
-
-import { TransformType } from "../interfece";
-
-// type MyState = {
-//   name: null;
-//   gender: null;
-//   born: null;
-//   died: null;
-//   culture: null;
-// };
+import { RandomCharIterface } from "../interfece";
 
 export default class RandomChar extends Component<RandomCharIterface> {
-  timerId: any;
-  constructor(props: RandomCharIterface) {
-    super(props);
-
-    console.log("Constructor");
-  }
-
   gotService = new gotService();
   state = {
     char: {},
     loading: true,
     error: false,
   };
+  timerId: any;
+  static defaultProps: { interval: number };
+  defaultProps = {
+    interval: 15000,
+  };
 
-  componentDidMount() {
-    this.updateChars();
-    this.timerId = setInterval(this.updateChars, 1500);
+  componentDidMount(): void {
+    this.updateChar();
+    this.timerId = setInterval(this.updateChar, this.props.interval);
   }
 
-  componentDidUpdate(prevProps: any) {
-    if (this.props.charId !== prevProps.charId) {
-      this.updateChars();
-    }
-  }
-
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     clearInterval(this.timerId);
   }
 
   onCharLoaded = (char: any) => {
-    this.setState({ char, loading: false });
+    this.setState({
+      char,
+      loading: false,
+    });
   };
 
-  onError = (err: string): void => {
+  onError = (err: any) => {
     this.setState({
       error: true,
       loading: false,
     });
   };
 
-  updateChars = (): void => {
-    const id = Math.floor(Math.random() * 140 + 25); // 25 - 140
+  updateChar = () => {
+    const id = Math.floor(Math.random() * 140 + 25); //25-140
     this.gotService
       .getCharacter(id)
       .then(this.onCharLoaded)
       .catch(this.onError);
   };
 
-  render(): JSX.Element {
-    console.log("Render");
-    const { char, loading, error }: any = this.state;
+  render() {
+    const { char, loading, error } = this.state;
 
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
@@ -75,15 +58,16 @@ export default class RandomChar extends Component<RandomCharIterface> {
 
     return (
       <div className="random-block rounded">
-        {spinner}
         {errorMessage}
+        {spinner}
         {content}
       </div>
     );
   }
 }
-const View = ({ char }: TransformType) => {
-  const { name, gender, born, died, culture }: any = char;
+
+const View = ({ char }: any) => {
+  const { name, gender, born, died, culture } = char;
   return (
     <>
       <h4>Random Character: {name}</h4>

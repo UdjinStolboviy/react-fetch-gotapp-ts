@@ -16,6 +16,9 @@ npm uninstall node-sass
 npm install node-sass@4.14.1
 yarn remove node-sass
 yarn add node-sass@4.14.1
+npm install react-router-dom
+npm i @types/react-router-dom
+
 
 � �����, ��� ������ ������� � ���, ��� �� �������������� �������������� ����������� � ������� npm, � �� ����� ��� ������������ node_modules ���� ������� � ������� yarn. ��� �����-�� �������������� ����� ����� ����� ����������� - ���� � ����� ��� ����� node_modules � lock � ������ ����� npm install(������� �������� ��� ����������� ����������� ������), ����� ��� ����� �������� ���������.
 
@@ -23,6 +26,7 @@ yarn add node-sass@4.14.1
 
 npm install react-bootstrap bootstrap
 npm install --save reactstrap react react-dom
+npm install --save prop-types
 ------------------------------------------------------------------------
 �������� ���� ������������  ����� ���� packagejson
 

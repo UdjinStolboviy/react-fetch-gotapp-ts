@@ -13,7 +13,9 @@ import { MouseEventHandler } from "react";
 
 
 export interface RandomCharIterface {
-    charId?: boolean | number,
+    itemId?: any,
+    bookId?: any,
+    history?: any,
     selectetChar?: number,
     error?: boolean,
     getCharacter?: (id: number | undefined) => void,
@@ -23,13 +25,17 @@ export interface RandomCharIterface {
         name?: any;
         gender?: any;
     }) => any;
-    getData?: any;
+    getData?: (itemId: any | undefined) => any;
+    interval?: number
 
     // onCharSelected?: (i: number | undefined) => void,
 }
 
 export interface ItemListInterface {
-    charId?: boolean | number,
+    data?: any,
+    bookId?: any,
+    history?: any,
+    itemId?: any,
     selectetChar?: number,
     getCharacter?: (id: number | undefined) => void,
     onItemSelected: (...i: any[]) => any;
@@ -38,7 +44,7 @@ export interface ItemListInterface {
         name?: any;
         gender?: any;
     }) => any;
-    getData?: any;
+    getData: () => any;
 }
 
 export interface TransformType {
@@ -46,7 +52,18 @@ export interface TransformType {
     [key: string]: string;
 }
 // }
+export interface BooksItemInterface {
+    bookId?: any,
+    getData?: (itemId: any | undefined) => any;
 
+}
+
+export interface ItemDetailsInterface {
+    itemId: any,
+    getData: any,
+    children?: any,
+    item?: any,
+}
 
 // interface TodoListItemProps {
 //     posts: Props[];

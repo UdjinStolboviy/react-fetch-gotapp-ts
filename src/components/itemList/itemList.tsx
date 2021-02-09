@@ -1,74 +1,65 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react/no-direct-mutation-state */
 import React, { Component } from "react";
 import "./itemList.css";
-
 import Spinner from "../spinner";
 import { ItemListInterface } from "../interfece";
+import gotService from "../../services/gotService";
 
-// type RequireKeys<T, TNames extends keyof T> = T &
-//   { [P in keyof T]-?: P extends TNames ? T[P] : never };
-// type ButtonProps2 = RequireKeys<ButtonProps, "onClick">;
+function ItemList(props: any): JSX.Element | { data: any } {
+  function renderItems(arr: any) {
+    return arr.map((item: any) => {
+      const { id } = item;
 
-export default class ItemList extends Component<ItemListInterface, {}, any> {
-  // this.onCharSelected = this.onCharSelected.bind(this);
+      const label = props.renderItem(item);
 
-  state = {
-    itemList: null,
-  };
-  // componentDidMount(): void {
-  //   this.updateCharList();
-  // }
-
-  // updateCharList(): void {
-  //   const { charId }: any = this.props;
-  //   if (!charId) {
-  //     return;
-  //   }
-  //   this.gotService.getAllCharacters().then((charList) => {
-  //     this.setState({ charList });
-  //   });
-  //   // this.foo.bar = 0;
-  // }
-
-  componentDidMount(): void {
-    const { getData } = this.props;
-
-    getData().then((itemList: any): void => {
-      this.setState({
-        itemList,
-      });
+      return (
+        <li
+          key={id}
+          className="list-group-item"
+          onClick={() => props.onItemSelected(id)}
+        >
+          {label}
+        </li>
+      );
     });
   }
+  const { data }: any = props;
 
-  renderItems(arr: any): JSX.Element {
-    return !arr
-      ? null
-      : arr.map(
-          (item: any, i: number): JSX.Element => {
-            const { id } = item;
-            const label = this.props.renderItem(item);
-            return (
-              <li
-                key={Math.random() + i}
-                className="list-group-item"
-                onClick={(): any => this.props.onItemSelected(40 + i)}
-              >
-                {label}
-              </li>
-            );
-          }
-        );
-  }
-
-  render(): JSX.Element {
-    const { itemList }: any = this.state;
-
-    const items = this.renderItems(itemList);
-
-    if (!itemList) {
-      return <Spinner />;
-    }
-    return <ul className="item-list list-group">{items}</ul>;
-  }
+  const items = renderItems(data);
+  return (
+    <>
+      <ul className="item-list list-group">{items}</ul>
+    </>
+  );
 }
+
+// ItemList.defaultProps = {
+//   onItemSelected: () => {},
+// }
+//
+const withData = (View: any, getData: () => Promise<any>) => {
+  return class extends Component<ItemListInterface, {}, any> {
+    state = {
+      data: null,
+    };
+    // static defaultProps: { onItemSelected: () => void; };
+
+    componentDidMount() {
+      getData().then((data: any) => {
+        this.setState({
+          data,
+        });
+      });
+    }
+    render(): JSX.Element {
+      const { data } = this.state;
+
+      if (!data) {
+        return <Spinner />;
+      }
+      return <View {...this.props} data={data} />;
+    }
+  };
+};
+
+const { getAllCharacters } = new gotService();
+export default withData(ItemList, getAllCharacters);
