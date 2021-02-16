@@ -18,9 +18,9 @@ export default class RandomChar extends Component<RandomCharIterface> {
     interval: 15000,
   };
 
-  componentDidMount(): void {
+  componentDidMount() {
     this.updateChar();
-    this.timerId = setInterval(this.updateChar, this.props.interval);
+    this.timerId = setInterval(this.updateChar, 15000);
   }
 
   componentWillUnmount(): void {
